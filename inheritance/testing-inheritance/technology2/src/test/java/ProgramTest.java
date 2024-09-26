@@ -1,8 +1,11 @@
+package org.launchcode;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class ComputerTest {
+
+public class ProgramTest {
     @Test
     public void emptyTest() {
         assertEquals(true, true);

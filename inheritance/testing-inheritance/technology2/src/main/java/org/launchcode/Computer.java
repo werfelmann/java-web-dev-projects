@@ -1,26 +1,16 @@
-package org.launchcode;
+package launchcode;
 
 public class Computer {
-    private String name;
     private int ram;
     private int storage;
     private String os;
     private double cost;
 
-    public Computer(String name, int ram, int storage, String os, double cost) {
-        this.name = name;
+    public Computer(int ram, int storage, String os, double cost) {
         this.ram = ram;
         this.storage = storage;
         this.os = os;
         this.cost = cost;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getRam() {
@@ -55,7 +45,7 @@ public class Computer {
         this.cost = cost;
     }
 
-    public String costPerGigOfStorage() {
-        return "Each gig of your computer costs $" + cost/storage + ".";
+    public double costPerGigOfStorage(double cost, int storage) {
+        return cost/storage;
     }
 }

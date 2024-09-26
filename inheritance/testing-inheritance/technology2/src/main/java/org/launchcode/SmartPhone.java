@@ -4,8 +4,8 @@ public class SmartPhone extends Computer {
     private final double screenSize;
     private String provider;
 
-    public SmartPhone(String name, int ram, int storage, String os, double cost, double screenSize, String provider) {
-        super(name, ram, storage, os, cost);
+    public SmartPhone(int ram, int storage, String os, double cost, double screenSize, String provider) {
+        super(ram, storage, os, cost);
         this.screenSize = screenSize;
         this.provider = provider;
     }
