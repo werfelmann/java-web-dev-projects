@@ -7,12 +7,12 @@ public class MenuItem {
     private String category;
     private boolean isNew;
 
-    public MenuItem(String name, double p, String d, String c, boolean iN) {
+    public MenuItem(String name, double price, String description, String category, boolean isNew) {
         this.name = name;
-        this.price = p;
-        this.description = d;
-        this.category = c;
-        this.isNew = iN;
+        this.price = price;
+        this.description = description;
+        this.category = category;
+        this.isNew = isNew;
     }
 
     public void setPrice(double price) {
@@ -33,6 +33,10 @@ public class MenuItem {
 
     public String getName() {
         return name;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public String getDescription() {
