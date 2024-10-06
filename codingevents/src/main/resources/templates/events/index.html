@@ -5,11 +5,14 @@
     <title></title>
 </head>
 <body>
+<h1>All Events</h1>
+<p th:unless="${events} and ${events.size()}">No events have been added. </p>
     <th:block th:each="event : ${events}">
         <ul>
             <li th:text="${event}">Event</li>
         </ul>
     </th:block>
+<p><a href="/events/create">Click here</a> to add an event.</p>
 
 </body>
 </html>
