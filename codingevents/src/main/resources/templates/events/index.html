@@ -6,7 +6,9 @@
 </head>
 <body>
     <th:block th:each="event : ${events}">
-        <p th:text="${event}">Event</p>
+        <ul>
+            <li th:text="${event}">Event</li>
+        </ul>
     </th:block>
 
 </body>

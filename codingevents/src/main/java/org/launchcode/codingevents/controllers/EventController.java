@@ -11,14 +11,20 @@ import java.util.List;
 @Controller
 @RequestMapping("events")
 public class EventController {
-    @GetMapping("/events")
-    public String events(Model model) {
+    @GetMapping
+    public String displayAllEvents(Model model) {
         List<String> eventList = new ArrayList<>();
         eventList.add("concert");
         eventList.add("wedding");
         eventList.add("holiday");
         eventList.add("graduation");
-
+        model.addAttribute("events", eventList);
         return "events/index";
+    }
+
+    // lives at /events/create
+    @GetMapping("create")
+    public String renderCreateEventForm() {
+        return "events/create";
     }
 }
