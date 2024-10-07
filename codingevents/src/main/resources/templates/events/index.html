@@ -1,16 +1,29 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
-<body>
+<head th:replace="fragments :: head">
+    <style>
+        .auto-width {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body class="container">
 <nav th:replace="fragments :: navigation"></nav>
 <h1>All Events</h1>
 
 <p th:unless="${events} and ${events.size()}">No events have been added. </p>
-    <th:block th:each="event : ${events}">
-        <ul>
-            <li th:text="${event}">Event</li>
-        </ul>
-    </th:block>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="auto-width">Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tr th:each="entry : ${events.entrySet()}">
+                <td class="auto-width" th:text="${entry.key}">Event</td>
+                <td th:text="${entry.value}">Description</td>
+        </tr>
+    </table>
 <p><a href="/events/create">Click here</a> to add an event.</p>
 
 </body>
