@@ -6,9 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.launchcode.codingevents.data.EventData.remove;
 
 
@@ -51,6 +48,20 @@ public class EventController {
         for (int id : eventIds) {
             EventData:remove(id);
         }
+        return "redirect:/events";
+    }
+
+    @GetMapping("edit/{eventId}")
+    public String displayEditForm(Model model, @PathVariable int eventId) {
+        Event eventToEdit = EventData.getById(eventId);
+        model.addAttribute("event", "eventToEdit");
+        String title = "Edit Event " + eventToEdit.getName() + "(id =" + eventToEdit.getId() + ")";
+        model.addAttribute("title", title);
+        return "event/edit";
+    }
+
+    @PostMapping("edit")
+    public String processEditForm(int eventId, String name, String description) {
         return "redirect:/events";
     }
 }

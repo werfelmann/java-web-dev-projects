@@ -14,6 +14,7 @@
         <div th:if="${!#lists.isEmpty(events)}"><li class="nav-item"><a href="/events" class="nav-link">All Events</a></li></div>
         <li class="nav-item"><a href="/events/create" class="nav-link">Create New Event</a></li>
         <li class="nav-item"><a href="/events/delete" class="nav-link">Delete Events</a></li>
+        <div th:if="${!#lists.isEmpty(events)}"><li class="nav-item"><a href="/events/edit" class="nav-link">Edit Events</a></li></div>
     </ul>
 </nav>
 

@@ -16,13 +16,13 @@
             <tr>
                 <th class="auto-width">Name</th>
                 <th>Description</th>
-                <th class="auto-width">Event ID</th>
+                <th class="auto-width">Edit Event</th>
             </tr>
         </thead>
         <tr th:each="event : ${events}">
                 <td class="auto-width" th:text="${event.name}">Event</td>
                 <td th:text="${event.description}">Description</td>
-                <td th:text="${event.id}"></td>
+                <td><a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a></td>
         </tr>
     </table>
 <p><a href="/events/create">Click here</a> to add an event.</p>
