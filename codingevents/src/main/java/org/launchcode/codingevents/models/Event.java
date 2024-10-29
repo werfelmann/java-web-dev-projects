@@ -10,29 +10,25 @@ import java.util.Objects;
 
 
 @Entity
-public class Event {
-
-    @Id
-    @GeneratedValue
-    private int id;
+public class Event extends AbstractEntity {
 
     @NotBlank
-    @Size(min=3, max=50, message="Name must be between 3 and 50 characters.")
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters.")
     private String name;
 
-    @Size(max=500, message="Description too long.")
+    @Size(max = 500, message = "Description too long.")
     private String description;
 
     @Email(message = "Please enter a valid email address.")
     private String contactEmail;
 
-    @NotBlank (message="Location may not be left blank.")
+    @NotBlank(message = "Location may not be left blank.")
     private String location;
 
-    @AssertTrue(message="Must confirm registration.")
+    @AssertTrue(message = "Must confirm registration.")
     private Boolean registrationRequired;
 
-    @Positive(message="Number of attendees must be greater than 0.")
+    @Positive(message = "Number of attendees must be greater than 0.")
     private int numberOfAttendees;
 
     private EventType type;
@@ -47,7 +43,8 @@ public class Event {
         this.type = type;
     }
 
-    public Event() {}
+    public Event() {
+    }
 
     public String getLocation() {
         return location;
@@ -98,9 +95,6 @@ public class Event {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public EventType getType() {
         return type;
@@ -115,16 +109,5 @@ public class Event {
         return "Event Name: " + name +
                 "\nDescription: " + description;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Event event)) return false;
-        return getId() == event.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
 }
+
