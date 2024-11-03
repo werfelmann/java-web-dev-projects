@@ -6,7 +6,7 @@ import jakarta.persistence.MappedSuperclass;
 
 import java.util.Objects;
 
-@MappedSuperclass
+@MappedSuperclass //"persistence annotation": fields in the class should be pushed to tables that correlates to the objects that extend it
 public abstract class AbstractEntity {
 
     @Id
@@ -21,8 +21,8 @@ public abstract class AbstractEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AbstractEntity that = (AbstractEntity) o;
-        return getId() == that.getId();
+        AbstractEntity entity = (AbstractEntity) o;
+        return getId() == entity.getId();
     }
 
     @Override

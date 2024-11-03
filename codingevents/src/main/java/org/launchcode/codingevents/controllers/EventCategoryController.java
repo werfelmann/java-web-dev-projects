@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("eventCategories")
 public class EventCategoryController {
@@ -36,11 +38,19 @@ public class EventCategoryController {
     }
 
     @PostMapping("create")
-    public String processCreateEventCategoryForm(@ModelAttribute @Valid EventCategory newCategory, Errors errors, Model model) {
+    public String processCreateEventCategoryForm(@ModelAttribute("category") @Valid EventCategory newCategory, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Category");
             model.addAttribute(new EventCategory());
+            return "eventCategories/create";
+        }
+
+        Optional<EventCategory> existingCategory = eventCategoryRepository.findByName(newCategory.getName());
+
+        if (existingCategory.isPresent()) {
+            model.addAttribute("title", "Create Category");
+            model.addAttribute("errorMessage", "This category already exists.");
             return "eventCategories/create";
         }
 

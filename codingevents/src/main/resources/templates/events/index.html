@@ -17,7 +17,7 @@
                 <th class="auto-width">Name</th>
                 <th>Description</th>
                 <th>Contact Email</th>
-                <th>Event Category</th>
+                <th>Category</th>
                 <th class="auto-width">Edit Event</th>
             </tr>
         </thead>
@@ -25,7 +25,7 @@
                 <td class="auto-width" th:text="${event.name}">Event</td>
                 <td th:text="${event.description}">Description</td>
                 <td th:text="${event.contactEmail}">Email</td>
-                <td th:text="${event.type.displayName}">Type</td>
+                <td th:text="${event.eventCategory.name}">Type</td>
                 <td><a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a></td>
         </tr>
     </table>
