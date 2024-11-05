@@ -1,8 +1,12 @@
 package org.launchcode.codingevents.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import org.springframework.core.metrics.StartupStep;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -12,76 +16,24 @@ public class Event extends AbstractEntity {
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters.")
     private String name;
 
-    @Size(max = 500, message = "Description too long.")
-    private String description;
-
-    @Email(message = "Please enter a valid email address.")
-    private String contactEmail;
-
-    @NotBlank(message = "Location may not be left blank.")
-    private String location;
-
-    @AssertTrue(message = "Must confirm registration.")
-    private Boolean registrationRequired;
-
-    @Positive(message = "Number of attendees must be greater than 0.")
-    private int numberOfAttendees;
+    @OneToOne(cascade = CascadeType.ALL)
+    @Valid
+    @NotNull
+    private EventDetails eventDetails;
 
     @ManyToOne
     @NotNull(message = "Category is required.")
     private EventCategory eventCategory;
 
-    public Event(String name, String description, String contactEmail, String location, Boolean registrationRequired, int numberOfAttendees, EventCategory eventCategory) {
+    @ManyToMany
+    private final List<Tag> tags = new ArrayList<>();
+
+    public Event(String name, EventCategory eventCategory) {
         this.name = name;
-        this.description = description;
-        this.contactEmail = contactEmail;
-        this.location = location;
-        this.registrationRequired = registrationRequired;
-        this.numberOfAttendees = numberOfAttendees;
-        this.eventCategory = new EventCategory();
+        this.eventCategory = eventCategory;
     }
 
     public Event() {
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Boolean getRegistrationRequired() {
-        return registrationRequired;
-    }
-
-    public void setRegistrationRequired(Boolean registrationRequired) {
-        this.registrationRequired = registrationRequired;
-    }
-
-    public int getNumberOfAttendees() {
-        return numberOfAttendees;
-    }
-
-    public void setNumberOfAttendees(int numberOfAttendees) {
-        this.numberOfAttendees = numberOfAttendees;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getContactEmail() {
-        return contactEmail;
-    }
-
-    public void setContactEmail(String contactEmail) {
-        this.contactEmail = contactEmail;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getName() {
@@ -100,10 +52,26 @@ public class Event extends AbstractEntity {
         this.eventCategory = eventCategory;
     }
 
+    public EventDetails getEventDetails() {
+        return eventDetails;
+    }
+
+    public void setEventDetails(EventDetails eventDetails) {
+        this.eventDetails = eventDetails;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+    }
+
     @Override
     public String toString() {
         return "Event Name: " + name +
-                "\nDescription: " + description;
+                "\nCategory: " + eventCategory;
     }
 }
 
